@@ -136,6 +136,8 @@ def webhook_handler():
         response = True
 
         if event.message.text.lower() == "show fsm":
+            machine.get_graph().draw("fsm.png", prog="dot", format="png")
+            return send_file("fsm.png", mimetype="image/png")
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
             if event.message.text.lower() == "start":
