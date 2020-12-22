@@ -39,6 +39,10 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
+            "source": "intro",
+        },
+        {
+            "trigger": "advance",
             "source": "user",
             "dest": "state1",
             "conditions": "is_going_to_state1",
@@ -128,7 +132,8 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
 
-        now_state="user"
+        now_state = "user"
+        response = False
 
         if event.message.text.lower() == "show fsm":
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
@@ -140,8 +145,8 @@ def webhook_handler():
                 now_state="intro"
                 machine.introduction()
             # if now_state == "intro":
-                
-                
+            #     if event.message.text == "1":
+
             else:
                 response = machine.advance(event)
 

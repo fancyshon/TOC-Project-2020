@@ -26,8 +26,9 @@ class TocMachine(GraphMachine):
         story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n輸入人物介紹查看角色"
         send_text_message(event.reply_token, story)
 
-    def on_exit_begin(self):
-        print('Leaving begin')
+    def on_exit_begin(self ):
+        print('Leaving begin ')
+
 
     def on_enter_intro(self, event):
         intro="1 => 班長\n2 => 學藝股長\n3 => 副班長\n4 => 體育股長\n5 => 風紀股長\ne => 離開"
