@@ -143,7 +143,7 @@ def webhook_handler():
                 machine.start(event)
             elif event.message.text == "人物介紹":
                 now_state="intro"
-                machine.introduction()
+                machine.introduction(event)
             # if now_state == "intro":
             #     if event.message.text == "1":
 
