@@ -35,7 +35,6 @@ machine = TocMachine(
             "source": "user",
             "dest": "begin",
         },
-
         {
             "trigger": "advance",
             "source": "user",
@@ -130,9 +129,9 @@ def webhook_handler():
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
             if event.message.text.lower() == "start":
-                response = machine.start()
+                machine.start(event)
             elif event.message.text == "人物介紹":
-                response = machine.introduction()
+                machine.introduction(event)
             else:
                 response = machine.advance(event)
 
