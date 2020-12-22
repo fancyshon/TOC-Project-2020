@@ -56,3 +56,6 @@ class TocMachine(GraphMachine):
     def on_enter_test(self, event):
         print("I'm entering test")
         send_text_message(event.reply_token, "Test test !")
+
+    def on_exit_test(self):
+        print("Exit test")
