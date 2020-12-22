@@ -23,7 +23,9 @@ intrduction = [
 ]
 
 machine = TocMachine(
-    states=["user","intro","begin", "state1", "state2","state3"],
+    states=["user", "intro", "begin",
+    "1", "2", "3", "4", "5",
+     "state1", "state2","state3"],
     transitions=[
         {
             "trigger": "introduction",
