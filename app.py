@@ -133,7 +133,7 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
 
         now_state = "user"
-        response = False
+        response = True
 
         if event.message.text.lower() == "show fsm":
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
