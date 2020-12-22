@@ -1,6 +1,6 @@
 import os
 import sys
-import pygraphviz
+import pygraphviz as p
 
 from flask import Flask, jsonify, request, abort, send_file
 from dotenv import load_dotenv
@@ -111,8 +111,12 @@ def webhook_handler():
         response = machine.advance(event)
  
         if event.message.text.lower() == "show picture":
-            machine.get_graph().draw("fsm.png", prog="dot", format="png")
-            return send_file("fsm.png", mimetype="image/png")
+            A=p.AGraph()
+            A.add_edge(1,2)
+            A.layout(prog="dot")
+            A.draw("1.png")
+            # machine.get_graph().draw("fsm.png", prog="dot", format="png")
+            # return send_file("fsm.png", mimetype="image/png")
 
         #    graph = pygraphviz.AGraph(directed=True)
         #    graph.add_node("A")

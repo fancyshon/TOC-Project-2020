@@ -1,2 +1,1 @@
-web: dot -c
-web: python3 app.py
+web: python app.py
