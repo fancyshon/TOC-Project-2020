@@ -1,5 +1,6 @@
 import os
 import sys
+import pygraphviz
 
 from flask import Flask, jsonify, request, abort, send_file
 from dotenv import load_dotenv
@@ -105,7 +106,7 @@ def webhook_handler():
         if response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
-        if event.message.text.lower() == "show picture":
+        elif event.message.text.lower() == "show picture":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
             return send_file("fsm.png", mimetype="image/png")
 
