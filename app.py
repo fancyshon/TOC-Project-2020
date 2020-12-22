@@ -104,8 +104,8 @@ def webhook_handler():
         response = machine.advance(event)
         if response == False:
             send_text_message(event.reply_token, "Not Entering any State")
-            
-        if event.lower() == "show picture":
+
+        if event.message.text.lower() == "show picture":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
             return send_file("fsm.png", mimetype="image/png")
 
