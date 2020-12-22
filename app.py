@@ -117,7 +117,7 @@ def webhook_handler():
         response = machine.advance(event)
  
         if event.message.text.lower() == "show picture":
-            send_image(event.reply_token ,"http://tranquil-brook-42124.herokuapp.com/show-fsm")
+            send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         elif response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
