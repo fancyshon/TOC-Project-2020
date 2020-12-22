@@ -19,6 +19,10 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "go to state3"
 
+    def test_function(self, event):
+        print("Get test message")
+        return event.message.text.lower() == "test"
+
     def on_enter_state1(self, event):
         print("I'm entering state1")
 
@@ -48,10 +52,6 @@ class TocMachine(GraphMachine):
 
     def on_exit_state3(self):
         print("Leaving state3")
-
-    def test_function(self, event):
-        print("Get test message")
-        return event.message.text.lower() == "test"
 
     def on_enter_test(self, event):
         print("I'm entering test")
