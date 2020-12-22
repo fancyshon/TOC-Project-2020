@@ -16,7 +16,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "state1", "state2","state3"],
     transitions=[
         {
             "trigger": "advance",
@@ -30,7 +30,13 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state3",
+            "conditions": "is_going_to_state3",
+        },
+        {"trigger": "go_back", "source": ["state1", "state2","state3"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -103,7 +109,7 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-        
+
         if event.message.text.lower() == "show picture":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
             return send_file("fsm.png", mimetype="image/png")
