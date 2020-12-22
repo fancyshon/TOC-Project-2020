@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message
+from utils import send_text_message,send_image
 
 load_dotenv()
 
@@ -35,6 +35,12 @@ machine = TocMachine(
             "source": "user",
             "dest": "state3",
             "conditions": "is_going_to_state3",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "test",
+            "conditions": "test_function",
         },
         {"trigger": "go_back", "source": ["state1", "state2","state3"], "dest": "user"},
     ],
@@ -111,19 +117,7 @@ def webhook_handler():
         response = machine.advance(event)
  
         if event.message.text.lower() == "show picture":
-            A=p.AGraph()
-            A.add_edge(1,2)
-            A.layout(prog="dot")
-            A.draw("1.png")
-            # machine.get_graph().draw("fsm.png", prog="dot", format="png")
-            # return send_file("fsm.png", mimetype="image/png")
-
-        #    graph = pygraphviz.AGraph(directed=True)
-        #    graph.add_node("A")
-        #    graph.add_edge("A", "B")
-        #    graph.add_edge("A", "G")
-        #    graph.layout()
-        #    graph.draw("output.png",prog = "neato")                   
+            send_image(event.reply_token ,"http://tranquil-brook-42124.herokuapp.com/show-fsm")
         elif response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
