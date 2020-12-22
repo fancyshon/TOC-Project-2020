@@ -13,11 +13,29 @@ from utils import send_text_message,send_image
 
 load_dotenv()
 
-
+intrduction = [
+    {
+        "trigger": "introduction",
+        "source": "user",
+        "dest": "intro",
+        "conditions": "go_to_intro",
+    }
+]
 
 machine = TocMachine(
-    states=["user", "state1", "state2","state3","test"],
+    states=["user","intro","begin", "state1", "state2","state3"],
     transitions=[
+        {
+            "trigger": "introduction",
+            "source": "begin",
+            "dest": "intro",
+        },
+        {
+            "trigger": "start",
+            "source": "user",
+            "dest": "begin",
+        },
+
         {
             "trigger": "advance",
             "source": "user",
@@ -31,17 +49,11 @@ machine = TocMachine(
             "conditions": "is_going_to_state2",
         },
         {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state3",
-            "conditions": "is_going_to_state3",
+            "trigger": "fin_intro",
+            "source": "intro",
+            "dest": "begin",
         },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "test",
-            "conditions": "test_function",
-        },
+        
         {"trigger": "go_back", "source": ["state1", "state2","state3"], "dest": "user"},
     ],
     initial="user",
@@ -114,13 +126,18 @@ def webhook_handler():
             continue
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
-        response = machine.advance(event)
- 
         if event.message.text.lower() == "show fsm":
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
-        elif response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+        else:
+            if event.message.text.lower() == "start":
+                response = machine.start()
+            elif event.message.text == "人物介紹":
+                response = machine.introduction()
+            else:
+                response = machine.advance(event)
 
+            if response == False:
+                send_text_message(event.reply_token, "Not Entering any State")
 
     return "OK"
 
