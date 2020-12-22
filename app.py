@@ -111,8 +111,13 @@ def webhook_handler():
         response = machine.advance(event)
 
         if event.message.text.lower() == "show picture":
-            machine.get_graph().draw("fsm.png", prog="dot", format="png")
-            return send_file("fsm.png", mimetype="image/png")
+           graph = pygraphviz.AGraph()
+           graph.add_node("A")
+           graph.add_edge("A", "B")
+           graph.add_edge("A", "G")
+           graph.layout(prog='dot')
+           graph.draw('output.png')
+                   
         elif response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
