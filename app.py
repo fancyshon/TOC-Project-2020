@@ -127,13 +127,20 @@ def webhook_handler():
             continue
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
+
+        now_state="user"
+
         if event.message.text.lower() == "show fsm":
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
             if event.message.text.lower() == "start":
+                now_state="start"
                 machine.start(event)
             elif event.message.text == "人物介紹":
+                now_state="intro"
                 machine.introduction()
+            # if now_state == "intro":
+                
                 
             else:
                 response = machine.advance(event)
