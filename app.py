@@ -37,10 +37,10 @@ machine = TocMachine(
             "source": "user",
             "dest": "begin",
         },
-        {
-            "trigger": "advance",
-            "source": "intro",
-        },
+        # {
+        #     "trigger": "advance",
+        #     "source": "intro",
+        # },
         {
             "trigger": "advance",
             "source": "user",
