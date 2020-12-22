@@ -116,7 +116,7 @@ def webhook_handler():
            graph.add_edge("A", "B")
            graph.add_edge("A", "G")
            graph.layout()
-           graph.draw("output.png",prog="neato")                   
+           graph.draw("output.png",prog = "neato")                   
         elif response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
