@@ -109,7 +109,7 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-
+ 
         if event.message.text.lower() == "show picture":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
             return send_file("fsm.png", mimetype="image/png")
