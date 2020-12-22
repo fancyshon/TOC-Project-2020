@@ -116,8 +116,7 @@ def webhook_handler():
            graph.add_edge("A", "B")
            graph.add_edge("A", "G")
            graph.layout(prog='dot')
-           graph.draw('output.png')
-                   
+           graph.draw('output.png')                   
         elif response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
