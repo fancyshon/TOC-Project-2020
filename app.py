@@ -133,7 +133,8 @@ def webhook_handler():
             if event.message.text.lower() == "start":
                 machine.start(event)
             elif event.message.text == "人物介紹":
-                machine.introduction(event)
+                machine.introduction()
+                
             else:
                 response = machine.advance(event)
 
