@@ -17,7 +17,7 @@ load_dotenv()
 machine = TocMachine(
     states=["user", "intro", "begin",
     "1", "2", "3", "4", "5",
-    "part1",
+    "part1","part2_1","part2_2",
      "state1", "state2","state3"],
     transitions=[
         {
@@ -50,6 +50,13 @@ machine = TocMachine(
         {
             "trigger": "go_to_part1", "source": "begin", "dest": "part1",
         },
+        {
+            "trigger": "go_to_part2_1", "source": "part1", "dest": "part2_1",
+        },
+        {
+            "trigger": "go_to_part2_2", "source": "part1", "dest": "part2_2",
+        },
+
         {
             "trigger": "advance",
             "source": "user",
@@ -140,7 +147,6 @@ def webhook_handler():
         response = True
         global now_state
         if event.message.text.lower() == "show fsm":
-            machine.get_graph().draw("fsm.png", prog="dot", format="png")
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
             if event.message.text.lower() == "start":
@@ -166,7 +172,15 @@ def webhook_handler():
                     now_state = "start"
             elif now_state == "start":
                 if event.message.text == "故事開始":
-                    print("start")
+                    machine.go_to_part1(event)
+                    now_state = "part1"
+            elif now_state == "part1":
+                if event.message.text == '1':
+                    machine.go_to_part2_1(event)
+                elif event.message.text == '2':
+                    machine.go_to_part2_2(event)
+
+
             if now_state == "user":
                 print("Fail")
                 response = machine.advance(event)
