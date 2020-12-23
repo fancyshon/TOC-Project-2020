@@ -13,34 +13,40 @@ from utils import send_text_message,send_image
 
 load_dotenv()
 
-intrduction = [
-    {
-        "trigger": "introduction",
-        "source": "user",
-        "dest": "intro",
-        "conditions": "go_to_intro",
-    }
-]
 
 machine = TocMachine(
     states=["user", "intro", "begin",
     "1", "2", "3", "4", "5",
+    "part1",
      "state1", "state2","state3"],
     transitions=[
         {
-            "trigger": "introduction",
-            "source": "begin",
-            "dest": "intro",
+            "trigger": "introduction", "source": "begin", "dest": "intro",
         },
         {
-            "trigger": "start",
-            "source": "user",
-            "dest": "begin",
+            "trigger": "start", "source": "user", "dest": "begin",
         },
-        # {
-        #     "trigger": "advance",
-        #     "source": "intro",
-        # },
+        {
+            "trigger": "go1", "source": "intro", "dest": "1"
+        },
+        {
+            "trigger": "go2", "source": "intro", "dest": "2"
+        },
+        {
+            "trigger": "go3", "source": "intro", "dest": "3"
+        },
+        {
+            "trigger": "go4", "source": "intro", "dest": "4"
+        },
+        {
+            "trigger": "go5", "source": "intro", "dest": "5"
+        },
+        {
+            "trigger": "back", "source": ["1", "2", "3", "4", "5"], "dest": "intro"
+        },
+        {
+            "trigger": "fin_intro", "source": "intro", "dest": "begin",
+        },
         {
             "trigger": "advance",
             "source": "user",
@@ -53,11 +59,7 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {
-            "trigger": "fin_intro",
-            "source": "intro",
-            "dest": "begin",
-        },
+        
         
         {"trigger": "go_back", "source": ["state1", "state2","state3"], "dest": "user"},
     ],
@@ -137,7 +139,6 @@ def webhook_handler():
 
         if event.message.text.lower() == "show fsm":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
-            return send_file("fsm.png", mimetype="image/png")
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
             if event.message.text.lower() == "start":
@@ -146,9 +147,21 @@ def webhook_handler():
             elif event.message.text == "人物介紹":
                 now_state="intro"
                 machine.introduction(event)
-            # if now_state == "intro":
-            #     if event.message.text == "1":
 
+            if now_state == "intro":
+                if event.message.text == "1":
+                    machine.go1(event)
+                elif event.message.text == "2":
+                    machine.go2(event)
+                elif event.message.text == "3":
+                    machine.go3(event)
+                elif event.message.text == "4":
+                    machine.go4(event)
+                elif event.message.text == "5":
+                    machine.go5(event)
+                elif event.message.text == "e":
+                    machine.back(event)
+                    now_state="start"
             else:
                 response = machine.advance(event)
 

@@ -10,13 +10,39 @@ class TocMachine(GraphMachine):
     
     def on_enter_begin(self, event):
         reply_token = event.reply_token
-        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n輸入人物介紹查看角色"
+        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n-----------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始故事"
         send_text_message(reply_token, story)
 
     def on_enter_intro(self, event):
         reply_token = event.reply_token
         intro="1 => 班長\n2 => 學藝股長\n3 => 副班長\n4 => 體育股長\n5 => 風紀股長\ne => 離開"
         send_text_message(reply_token, intro)
+
+    def on_enter_1(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "班長:他人緣很好，大家都聽他的")
+        self.back()
+
+    def on_enter_2(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "學藝股長:比女人還像女人，大家都懷疑他喜歡男生")
+        self.back()
+
+    def on_enter_3(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "副班長:總是附和班長")
+        self.back()
+
+    def on_enter_4(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "體育股長:最愛瞎鬧，有他在的地方都很熱鬧")
+        self.back()
+
+    def on_enter_5(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "風紀股長:負責管班上秩序，其實自己也很愛鬧")
+        self.back()
+
 
     def on_enter_state1(self, event):
         print("I'm entering state1")
