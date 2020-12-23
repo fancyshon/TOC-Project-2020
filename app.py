@@ -161,8 +161,9 @@ def webhook_handler():
                     machine.go5(event)
                 elif event.message.text == "e":
                     machine.back(event)
-                    now_state="start"
-            else:
+                    now_state = "start"
+                    
+            if now_state == "user":
                 print("Fail")
                 response = machine.advance(event)
 
