@@ -109,7 +109,7 @@ def callback():
 
     return "OK"
 
-
+now_state = "user"
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
     signature = request.headers["X-Line-Signature"]
@@ -134,7 +134,6 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
 
-        now_state = "user"
         response = True
 
         if event.message.text.lower() == "show fsm":
@@ -155,7 +154,7 @@ def webhook_handler():
                     machine.go2(event)
                 elif event.message.text == "3":
                     machine.go3(event)
-                elif event.message.text == "4":
+                elif event.message.text == 4:
                     machine.go4(event)
                 elif event.message.text == "5":
                     machine.go5(event)
