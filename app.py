@@ -48,6 +48,9 @@ machine = TocMachine(
             "trigger": "fin_intro", "source": "intro", "dest": "begin",
         },
         {
+            "trigger": "go_to_part1", "source": "begin", "dest": "part1",
+        },
+        {
             "trigger": "advance",
             "source": "user",
             "dest": "state1",
@@ -135,7 +138,7 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
 
         response = True
-
+        global now_state
         if event.message.text.lower() == "show fsm":
             machine.get_graph().draw("fsm.png", prog="dot", format="png")
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
@@ -154,14 +157,16 @@ def webhook_handler():
                     machine.go2(event)
                 elif event.message.text == "3":
                     machine.go3(event)
-                elif event.message.text == 4:
+                elif event.message.text == "4":
                     machine.go4(event)
                 elif event.message.text == "5":
                     machine.go5(event)
                 elif event.message.text == "e":
-                    machine.back(event)
+                    machine.fin_intro(event)
                     now_state = "start"
-                    
+            elif now_state == "start":
+                if event.message.text == "故事開始":
+                    print("start")
             if now_state == "user":
                 print("Fail")
                 response = machine.advance(event)
