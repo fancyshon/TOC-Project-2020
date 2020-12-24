@@ -256,36 +256,36 @@ def webhook_handler():
                 elif event.message.text == '2':
                     machine.dare(event)
             elif machine.state == "part3_1":
-                if event.message.text == "回答大家":
+                if event.message.text == "不想回答":
                     machine.ans(event)
             elif machine.state =="answer":
-                if event.message.text == "os":
+                if event.message.text == "哇，好尷尬...":
                     machine.os(event)
-                elif event.message.text == "laugh":
+                elif event.message.text == "哈哈哈，我就知道":
                     machine.laugh_at(event)
                 elif event.message.text == "阻止大家":
                     machine.stop(event)
             elif machine.state == "bully":
-                if event.message.text == "nothing":
+                if event.message.text == "沒我的事":
                     machine.nothing(event)
-                elif event.message.text == "help":
+                elif event.message.text == "他們太誇張了，我會幫你想辦法處理的":
                     machine.concern(event)
             elif machine.state == "part3_2":
-                if event.message.text == "cheek":
+                if event.message.text == "親臉頰就好了吧?":
                     machine.kiss(event)
-                elif event.message.text == "french":
+                elif event.message.text == "喇機!喇機!(眾人在鼓譟)":
                     machine.french_kiss(event)
                 elif event.message.text =="阻止大家":
                     machine.stop(event)
             elif machine.state == "cheek_kiss":
-                if event.message.text == "kidding":
+                if event.message.text == "他沒說甚麼，開玩笑應該沒關係吧":
                     machine.kidding(event)
-                elif event.message.text == "concern":
+                elif event.message.text == "別欺負他，住手拉!":
                     machine.concern(event)
             elif machine.state == "french_kiss":
-                if event.message.text == "concern":
+                if event.message.text == "跟他說:回來上課吧，我會幫你跟大家說清楚":
                     machine.concern(event)
-                elif event.message.text == "nothing":
+                elif event.message.text == "沒我的事":
                     machine.nothing(event)
             elif machine.state == "part2_2":
                 if event.message.text == '1':
@@ -293,22 +293,22 @@ def webhook_handler():
                 elif event.message.text == '2':
                     machine.dare(event)
             elif machine.state == "part4_1":
-                if event.message.text == "cuirous":
+                if event.message.text == "其實我也有點好奇":
                     machine.tell_secret(event)
             elif machine.state == "secret":
-                if event.message.text == "em":
+                if event.message.text == "果然呢":
                     machine.murmur(event)
-                elif event.message.text == 'dead':
+                elif event.message.text == '早就覺得她很奇怪':
                     machine.laugh(event)
                 elif event.message.text == "阻止班長":
                     machine.stop(event)
             elif machine.state == "part4_2":
-                if event.message.text == "open":
+                if event.message.text == "打開書包":
                     machine.open(event)
             elif machine.state == "open_bag":
-                if event.message.text == "8":
+                if event.message.text == "哇!超讚的八卦":
                     machine.gossip(event)
-                elif event.message.text == "崩潰":
+                elif event.message.text == "學藝應該很崩潰吧":
                     machine.be_sympathy(event)
 
             if machine.state == "user":

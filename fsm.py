@@ -70,7 +70,7 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='不想回答',
-                                text = '回答大家'
+                                text = '不想回答'
                             )
                         ]
                     )
@@ -89,11 +89,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='哇，好尷尬...',
-                                text = 'os'
+                                text = '哇，好尷尬...'
                             ),
                             MessageTemplateAction(
                                 label='哈哈哈，我就知道!',
-                                text = 'laugh'
+                                text = '哈哈哈，我就知道'
                             )
                         ]
                     )
@@ -118,11 +118,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='沒我的事',
-                                text = 'nothing'
+                                text = '沒我的事'
                             ),
                             MessageTemplateAction(
-                                label='他們太誇張了，我會想辦法處理的',
-                                text = 'help'
+                                label='看不下去',
+                                text = '他們太誇張了，我會幫你想辦法處理的'
                             )
                         ]
                     )
@@ -144,11 +144,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='親臉頰就好了吧?',
-                                text = 'cheek'
+                                text = '親臉頰就好了吧?'
                             ),
                             MessageTemplateAction(
                                 label='喇機!喇機!(眾人在鼓譟)',
-                                text = 'french'
+                                text = '喇機!喇機!(眾人在鼓譟)'
                             )
                         ]
                     )
@@ -170,11 +170,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='別欺負他，住手拉!',
-                                text = 'concern'
+                                text = '別欺負他，住手拉!'
                             ),
                             MessageTemplateAction(
-                                label='他沒說甚麼，開玩笑應該沒關係吧',
-                                text = 'kidding'
+                                label='應該沒關係吧',
+                                text = '他沒說甚麼，開玩笑應該沒關係吧'
                             )
                         ]
                     )
@@ -193,12 +193,12 @@ class TocMachine(GraphMachine):
                         text = story,
                         actions=[
                             MessageTemplateAction(
-                                label='跟他說:回來上課吧，我會幫你跟大家說清楚的。',
-                                text = 'concern'
+                                label='聯絡他',
+                                text = '跟他說:回來上課吧，我會幫你跟大家說清楚'
                             ),
                             MessageTemplateAction(
                                 label='沒我的事',
-                                text = 'nothing'
+                                text = '沒我的事'
                             )
                         ]
                     )
@@ -224,7 +224,7 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='其實我也有點好奇',
-                                text = 'cuirous'
+                                text = '其實我也有點好奇'
                             )
                         ]
                     )
@@ -244,11 +244,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='果然呢',
-                                text = 'em'
+                                text = '果然呢'
                             ),
                             MessageTemplateAction(
                                 label='早就覺得她很奇怪',
-                                text = 'dead'
+                                text = '早就覺得她很奇怪'
                             )
                         ]
                 )
@@ -269,7 +269,7 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='打開書包',
-                                text = 'open'
+                                text = '打開書包'
                             )
                         ]
                     )
@@ -288,11 +288,11 @@ class TocMachine(GraphMachine):
                         actions=[
                             MessageTemplateAction(
                                 label='哇!超讚的八卦',
-                                text = '8'
+                                text = '哇!超讚的八卦'
                             ),
                             MessageTemplateAction(
                                 label='學藝應該很崩潰吧',
-                                text = '崩潰'
+                                text = '學藝應該很崩潰吧'
                             )
                         ]
                     )
