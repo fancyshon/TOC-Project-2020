@@ -242,7 +242,7 @@ def webhook_handler():
                     machine.go5(event)
                 elif event.message.text == "e":
                     machine.fin_intro(event)
-            elif machine.state == "start":
+            elif machine.state == "begin":
                 if event.message.text == "故事開始":
                     machine.go_to_part1(event)
             elif machine.state == "part1":
