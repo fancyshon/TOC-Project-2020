@@ -220,9 +220,11 @@ def webhook_handler():
 
         response = True
         if event.message.text.lower() == "show fsm":
-            send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
+            send_image(event.reply_token, "https://tranquil-brook-42124.herokuapp.com/show-fsm")
+
         else:
             if event.message.text.lower() == "restart":
+                send_image(event.reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/show-fsm.png")
                 machine.state = "user"
             if event.message.text.lower() == "start":
                 machine.start(event)
