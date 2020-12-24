@@ -283,7 +283,7 @@ def webhook_handler():
                     machine.kidding(event)
                 elif event.message.text == "別欺負他，住手拉!":
                     machine.concern(event)
-            elif machine.state == "french_kiss":
+            elif machine.gitstate == "french_kiss":
                 if event.message.text == "跟他說:回來上課吧，我會幫你跟大家說清楚":
                     machine.concern(event)
                 elif event.message.text == "沒我的事":

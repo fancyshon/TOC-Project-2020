@@ -1,7 +1,7 @@
 import os
 from transitions.extensions import GraphMachine
 
-from utils import send_text_message
+from utils import send_text_message,send_image
 from linebot import LineBotApi
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction)
 
@@ -24,27 +24,27 @@ class TocMachine(GraphMachine):
 
     def on_enter_1(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "班長:他人緣很好，大家都聽他的")
+        send_image(reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/%E7%8F%AD%E9%95%B7.png")
         self.back(event)
 
     def on_enter_2(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "學藝股長:比女人還像女人，大家都懷疑他喜歡男生")
+        send_image(reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/%E5%AD%B8%E8%97%9D.png")
         self.back(event)
 
     def on_enter_3(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "副班長:總是附和班長")
+        send_image(reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/%E5%89%AF%E7%8F%AD%E9%95%B7.png")
         self.back(event)
 
     def on_enter_4(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "體育股長:最愛瞎鬧，有他在的地方都很熱鬧")
+        send_image(reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/%E9%AB%94%E8%82%B2.png")
         self.back(event)
 
     def on_enter_5(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "風紀股長:負責管班上秩序，其實自己也很愛鬧")
+        send_image(reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/%E9%A2%A8%E7%B4%80.png")
         self.back(event)
 
     def on_enter_part1(self, event):
