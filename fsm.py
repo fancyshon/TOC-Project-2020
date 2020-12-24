@@ -1,12 +1,16 @@
+import os
 from transitions.extensions import GraphMachine
 
 from utils import send_text_message
+from linebot import LineBotApi
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage,TemplateSendMessage,ButtonsTemplate,MessageTemplateAction)
 
+channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
+line_bot_api = LineBotApi(channel_access_token)
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
-
     
     def on_enter_begin(self, event):
         reply_token = event.reply_token
@@ -53,6 +57,151 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         choice="\n\n-----------\n你選擇 1 => 真心話 ,2 => 大冒險"
         send_text_message(reply_token, "瓶子轉到學藝，大家開始鼓譟要他..."+choice)
+
+    def on_enter_part3_1(self, event):
+        reply_token = event.reply_token
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '真心話',
+                        text = '欸，老實說你是不是喜歡男生\n副班長問。',
+                        actions=[
+                            MessageTemplateAction(
+                                label='不想回答',
+                                text = '回答大家'
+                            )
+                        ]
+                    )
+            )
+        )
+    def on_enter_answer(self, event):
+        reply_token = event.reply_token
+        story = "學藝的手機被搶了過來，看著裡面的相簿裡滿滿的都是班長的照片，大家覺得..."
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '你覺得...',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='哇，好尷尬...',
+                                text = 'os'
+                            ),
+                            MessageTemplateAction(
+                                label='哈哈哈，我就知道!',
+                                text = 'laugh'
+                            )
+                        ]
+                    )
+            )
+        )
+        send_text_message(reply_token, "或者你想要阻止他們搶學藝手機\n輸入 阻止大家")
+
+    def on_enter_embarassed(self, event):
+        self.equal(event)
+        
+    def on_enter_bully(self, event):
+        reply_token = event.reply_token
+        story = "那天之後，這件事也在全班傳開了，死GAY，也成為學藝的名字，書桌上常常被寫一些不堪入目的字句。"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '你覺得',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='沒我的事',
+                                text = 'nothing'
+                            ),
+                            MessageTemplateAction(
+                                label='他們太誇張了，我會想辦法處理的',
+                                text = 'help'
+                            )
+                        ]
+                    )
+            )
+        )
+
+    def on_enter_part3_2(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "有種的話，就和班長接吻啊!\n體育股長說。學藝漲紅著臉不說話")
+
+        story="開朗的班長難得做出嫌惡的表情，學藝愾起來快哭了。"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '學藝會...',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='親臉頰就好了吧?',
+                                text = 'cheek'
+                            ),
+                            MessageTemplateAction(
+                                label='喇機!喇機!(眾人在鼓譟)',
+                                text = 'french'
+                            )
+                        ]
+                    )
+            )
+        )
+        send_text_message(reply_token, "或是你覺得太過火了\n輸入 阻止大家")
+
+    def on_enter_cheek_kiss(self, event):
+        reply_token = event.reply_token
+        story = "那天之後，大家更常對學藝開玩笑，看她沒什麼反應，我們也不以為意"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '你覺得',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='別欺負他，住手拉!',
+                                text = 'concern'
+                            ),
+                            MessageTemplateAction(
+                                label='他沒說甚麼，開他玩笑應該沒關係吧',
+                                text = 'kidding'
+                            )
+                        ]
+                    )
+            )
+        )
+
+    def on_enter_french_kiss(self, event):
+        reply_token = event.reply_token
+        story = "那天之後，學藝跟班長變得很尷尬，也不太敢跟大家互動，越來越常缺席..."
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '你覺得',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='跟他說:回來上課吧，我會幫你跟大家說清楚的。',
+                                text = 'concern'
+                            ),
+                            MessageTemplateAction(
+                                label='沒我的事',
+                                text = 'nothing'
+                            )
+                        ]
+                    )
+            )
+        )
 
     #逆時鐘
     def on_enter_part2_2(self, event):

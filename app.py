@@ -68,6 +68,9 @@ machine = TocMachine(
             "trigger": "os", "source": "answer", "dest": "embarassed",
         },
         {
+            "trigger": "stop", "source": "answer", "dest": "good_ending",
+        },
+        {
             "trigger": "laugh_at", "source": "answer", "dest": "bully",
         },
         {
@@ -82,6 +85,9 @@ machine = TocMachine(
 
         {
             "trigger": "dare", "source": "part2_1", "dest": "part3_2",
+        },
+        {
+            "trigger": "stop", "source": "part3_2", "dest": "good_ending",
         },
         {
             "trigger": "french_kiss", "source": "part3_2", "dest": "french_kiss",
@@ -188,7 +194,6 @@ def callback():
 
     return "OK"
 
-now_state = "user"
 @app.route("/webhook", methods=["POST"])
 def webhook_handler():
     signature = request.headers["X-Line-Signature"]
@@ -214,18 +219,17 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
 
         response = True
-        global now_state
         if event.message.text.lower() == "show fsm":
             send_image(event.reply_token ,"https://tranquil-brook-42124.herokuapp.com/show-fsm")
         else:
+            if event.message.text.lower() == "restart":
+                machine.state = "user"
             if event.message.text.lower() == "start":
-                now_state="start"
                 machine.start(event)
             elif event.message.text == "人物介紹":
-                now_state="intro"
                 machine.introduction(event)
 
-            if now_state == "intro":
+            if machine.state == "intro":
                 if event.message.text == "1":
                     machine.go1(event)
                 elif event.message.text == "2":
@@ -238,25 +242,60 @@ def webhook_handler():
                     machine.go5(event)
                 elif event.message.text == "e":
                     machine.fin_intro(event)
-                    now_state = "start"
-            elif now_state == "start":
+            elif machine.state == "start":
                 if event.message.text == "故事開始":
                     machine.go_to_part1(event)
-                    now_state = "part1"
-            elif now_state == "part1":
+            elif machine.state == "part1":
                 if event.message.text == '1':
                     machine.go_to_part2_1(event)
                 elif event.message.text == '2':
                     machine.go_to_part2_2(event)
+            elif machine.state == "part2_1":
+                if event.message.text == '1':
+                    machine.truth(event)
+                elif event.message.text == '2':
+                    machine.dare(event)
+            elif machine.state == "part3_1":
+                if event.message.text == "回答大家":
+                    machine.ans(event)
+            elif machine.state =="answer":
+                if event.message.text == "os":
+                    machine.os(event)
+                elif event.message.text == "laugh":
+                    machine.laugh_at(event)
+                elif event.message.text == "阻止大家":
+                    machine.stop(event)
+            elif machine.state == "bully":
+                if event.message.text == "nothing":
+                    machine.nothing(event)
+                elif event.message.text == "help":
+                    machine.concern(event)
+            elif machine.state == "part3_2":
+                if event.message.text == "cheek":
+                    machine.kiss(event)
+                elif event.message.text == "french":
+                    machine.french_kiss(event)
+                elif event.message.text =="阻止大家":
+                    machine.stop(event)
+            elif machine.state == "cheek_kiss":
+                if event.message.text == "kidding":
+                    machine.kidding(event)
+                elif event.message.text == "concern":
+                    machine.concern(event)
+            elif machine.state == "french_kiss":
+                if event.message.text == "concern":
+                    machine.concern(event)
+                elif event.message.text == "nothing":
+                    machine.nothing(event)
+            
 
-
-            if now_state == "user":
+            if machine.state == "user":
                 print("Fail")
                 response = machine.advance(event)
 
             if response == False:
                 send_text_message(event.reply_token, "Not Entering any State")
-            print(now_state)
+            print(machine.state)
 
     return "OK"
 
