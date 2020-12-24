@@ -18,9 +18,9 @@ machine = TocMachine(
     states=["user", "intro", "begin",
     "1", "2", "3", "4", "5",
     "part1", "part2_1", "part2_2", "part3_1", "part3_2", "part4_1", "part4_2",
-    "french_kiss", "cheek_kiss", "do_nothin", "concern_about",
+    "french_kiss", "cheek_kiss",
     "answer", "embarassed", "bully",
-    "secret","open_bag","love_letter"
+    "secret","open_bag","love_letter",
     "good_ending","bad_ending","suicide_ending",
      "state1", "state2"],
     transitions=[
@@ -62,7 +62,7 @@ machine = TocMachine(
             "trigger": "truth", "source": "part2_1", "dest": "part3_1",
         },
         {
-            "trigger": "ans", "source": "truth", "dest": "answer",
+            "trigger": "ans", "source": "part3_1", "dest": "answer",
         },
         {
             "trigger": "os", "source": "answer", "dest": "embarassed",
@@ -137,7 +137,7 @@ machine = TocMachine(
             "trigger": "gossip", "source": "love_letter", "dest": "bully",
         },
         {
-            "trigger": "be_sympathy", "source": "love_letter", "dest": "cheek",
+            "trigger": "be_sympathy", "source": "love_letter", "dest": "cheek_kiss",
         },
         
         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
