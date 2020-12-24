@@ -299,24 +299,28 @@ class TocMachine(GraphMachine):
             )
         )
 
+    #        send_text_message(reply_token, story)
+
+    
     def on_enter_bad_ending(self, event):
         reply_token = event.reply_token
+        story = "---------"
         line_bot_api.reply_message(
-            reply_token, [
-                TextSendMessage(test="幾個禮拜後，看這學藝空空的座位，沒想到因為這起事件導致他轉到別的學校，就這樣逼走自己的同學，我真的做對了嗎?"),
-                TemplateSendMessage(
+            event.reply_token, [
+            TextSendMessage(text="幾個禮拜後，看這學藝空空的座位，沒想到因為這起事件導致他轉到別的學校，就這樣逼走自己的同學，我真的做對了嗎")
+            ,TemplateSendMessage(
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
-                        title='怎麼會這樣?',
-                        text='---------------',
+                        title = '怎麼會這樣',
+                        text = story,
                         actions=[
                             MessageTemplateAction(
-                                label='繼續',
+                                label='繼續.',
                                 text = '繼續'
                             )
                         ]
                     )
-                )
+            )
             ]
         )
         
@@ -324,30 +328,28 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         line_bot_api.reply_message(
             reply_token, 
-                TextSendMessage(test="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的")
-                #ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png")
-            
+                TextSendMessage(test="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的")            
         )
 
     def on_enter_suicide_ending(self, event):
         reply_token = event.reply_token
+        story = "---------"
         line_bot_api.reply_message(
-            reply_token, [
-                TextSendMessage(test="起初我們以為這只是個玩笑，直到導師告訴全班這個消息時候，我們才知道一點都不好笑，原來在經過班上幾個個禮拜不開其擾的霸凌後，學藝輕生了。"),
-                TemplateSendMessage(
+            event.reply_token, [
+            TextSendMessage(text="起初我們以為這只是個玩笑，直到導師告訴全班這個消息時候，我們才知道一點都不好笑，原來在經過班上幾個個禮拜不開其擾的霸凌後，學藝輕生了。")
+            ,TemplateSendMessage(
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
                         title = '到底怎麼變成這樣的',
-                        text='---------------', 
+                        text = story,
                         actions=[
                             MessageTemplateAction(
-                                label='繼續',
+                                label='繼續.',
                                 text = '繼續'
                             )
                         ]
                     )
-                )
-                #ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/dead_end.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/dead_end.png")
+            )
             ]
         )
 
