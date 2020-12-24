@@ -131,11 +131,11 @@ class TocMachine(GraphMachine):
 
     def on_enter_part3_2(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "有種的話，就和班長接吻啊!\n體育股長說。學藝漲紅著臉不說話")
 
         story="開朗的班長難得做出嫌惡的表情，學藝看起來快哭了。"
         line_bot_api.reply_message(
-            event.reply_token,
+            event.reply_token, [
+            TextSendMessage(text="有種的話，就和班長接吻啊!\n體育股長說。學藝漲紅著臉不說話"),
             TemplateSendMessage(
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
@@ -152,9 +152,10 @@ class TocMachine(GraphMachine):
                             )
                         ]
                     )
-            )
+            ),
+            TextSendMessage(text="或是你覺得太過火了\n輸入 阻止大家")
+            ]
         )
-        send_text_message(reply_token, "或是你覺得太過火了\n輸入 阻止大家")
 
     def on_enter_cheek_kiss(self, event):
         reply_token = event.reply_token
@@ -301,15 +302,17 @@ class TocMachine(GraphMachine):
     def on_enter_bad_ending(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "幾個禮拜後，看這學藝空空的座位，沒想到因為這起事件導致他轉到別的學校，就這樣逼走自己的同學，我真的做對了嗎?")
-
-    def on_enter_bad_ending(self, event):
+        self.end(event)
+        
+    def on_enter_good_ending(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的")
 
-    def on_enter_bad_ending(self, event):
+    def on_enter_suicide_ending(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "起初我們以為這只是個玩笑，直到導師告訴全班這個消息時候，我們才知道一點都不好笑，原來在經過班上幾個個禮拜不開其擾的霸凌後，學藝輕生了。\n到底怎麼變成這樣的")
-    
+        self.end(event)
+
     def on_enter_result(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token,"回想之前的每個時刻，其實我們都有機會站出來為他發生，性向沒有對錯，錯的是你的觀念" )
