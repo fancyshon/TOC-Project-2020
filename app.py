@@ -224,7 +224,6 @@ def webhook_handler():
 
         else:
             if event.message.text.lower() == "restart":
-                send_image(event.reply_token, "https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/show-fsm.png")
                 machine.state = "user"
             if event.message.text.lower() == "start":
                 machine.start(event)
