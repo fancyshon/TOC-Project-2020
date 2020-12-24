@@ -315,7 +315,7 @@ class TocMachine(GraphMachine):
                         text = story,
                         actions=[
                             MessageTemplateAction(
-                                label='繼續.',
+                                label='繼續',
                                 text = '繼續'
                             )
                         ]
@@ -335,7 +335,6 @@ class TocMachine(GraphMachine):
         )
 
     def on_enter_suicide_ending(self, event):
-        reply_token = event.reply_token
         story = "-----------------"
         line_bot_api.reply_message(
             event.reply_token, [
@@ -359,9 +358,8 @@ class TocMachine(GraphMachine):
         )
 
     def on_enter_final_result(self, event):
-        reply_token = event.reply_token
         line_bot_api.reply_message(
-            reply_token, [
+            event.reply_token, [
                 TextSendMessage(test="回想之前的每個時刻，其實我們都有機會站出來為他發生，性向沒有對錯，錯的是你的觀念"),
                 ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png")
             ]
