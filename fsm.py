@@ -307,7 +307,8 @@ class TocMachine(GraphMachine):
                 TemplateSendMessage(
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
-                        title = '怎麼會這樣?',
+                        title='怎麼會這樣?',
+                        text="",
                         actions=[
                             MessageTemplateAction(
                                 label='繼續',
@@ -337,6 +338,7 @@ class TocMachine(GraphMachine):
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
                         title = '到底怎麼變成這樣的',
+                        text="", 
                         actions=[
                             MessageTemplateAction(
                                 label='繼續',
