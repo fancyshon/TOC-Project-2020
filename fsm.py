@@ -14,7 +14,7 @@ class TocMachine(GraphMachine):
     
     def on_enter_begin(self, event):
         reply_token = event.reply_token
-        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n--------------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始故事"
+        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n--------------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始這段故事\n你的所有選擇將會影響故事的走向"
         send_text_message(reply_token, story)
 
     def on_enter_intro(self, event):

@@ -145,7 +145,7 @@ machine = TocMachine(
         },
 
         {
-            "trigger": "end", "source": ["bad_ending","suicide_ending"], "dest": "result",        
+            "trigger": "end", "source": ["bad_ending","suicide_ending"], "dest": "final_result",        
         }   
     ],
     initial="user",
