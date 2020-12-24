@@ -308,7 +308,7 @@ class TocMachine(GraphMachine):
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
                         title='怎麼會這樣?',
-                        text="---------------",
+                        text="------hi---------",
                         actions=[
                             MessageTemplateAction(
                                 label='繼續',
@@ -324,8 +324,8 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         line_bot_api.reply_message(
             reply_token, [
-                TextSendMessage(test="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的"),
-                ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png")
+                TextSendMessage(test="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的")
+                #ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png")
             ]
         )
 
@@ -338,7 +338,7 @@ class TocMachine(GraphMachine):
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
                         title = '到底怎麼變成這樣的',
-                        text="---------------", 
+                        text="-------hi--------", 
                         actions=[
                             MessageTemplateAction(
                                 label='繼續',

@@ -223,7 +223,7 @@ def webhook_handler():
             send_image(event.reply_token, "https://tranquil-brook-42124.herokuapp.com/show-fsm")
 
         else:
-            if event.message.text.lower() == "restart":
+            if event.message.text == "重新開始":
                 machine.state = "user"
                 send_text_message(event.reply_token,"Set state as user")
             if event.message.text.lower() == "start":
