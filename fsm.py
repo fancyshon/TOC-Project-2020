@@ -302,7 +302,6 @@ class TocMachine(GraphMachine):
     def on_enter_bad_ending(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "幾個禮拜後，看這學藝空空的座位，沒想到因為這起事件導致他轉到別的學校，就這樣逼走自己的同學，我真的做對了嗎?")
-        self.end()
         
     def on_enter_good_ending(self, event):
         reply_token = event.reply_token
@@ -321,7 +320,6 @@ class TocMachine(GraphMachine):
                 send_image(reply_token,"https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/dead_end.png")
             ]
         )
-        self.end()
 
     def on_enter_final_result(self, event):
         reply_token = event.reply_token

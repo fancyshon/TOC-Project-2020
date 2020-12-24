@@ -225,6 +225,7 @@ def webhook_handler():
         else:
             if event.message.text.lower() == "restart":
                 machine.state = "user"
+                send_text_message(event.reply_token,"Set state as user")
             if event.message.text.lower() == "start":
                 machine.start(event)
             elif event.message.text == "人物介紹":
@@ -269,6 +270,7 @@ def webhook_handler():
             elif machine.state == "bully":
                 if event.message.text == "沒我的事":
                     machine.nothing(event)
+                    machine.end(event)
                 elif event.message.text == "他們太誇張了，我會幫你想辦法處理的":
                     machine.concern(event)
             elif machine.state == "part3_2":
@@ -281,6 +283,7 @@ def webhook_handler():
             elif machine.state == "cheek_kiss":
                 if event.message.text == "他沒說甚麼，開玩笑應該沒關係吧":
                     machine.kidding(event)
+                    machine.end(event)
                 elif event.message.text == "別欺負他，住手拉!":
                     machine.concern(event)
             elif machine.state == "french_kiss":
@@ -288,6 +291,7 @@ def webhook_handler():
                     machine.concern(event)
                 elif event.message.text == "沒我的事":
                     machine.nothing(event)
+                    machine.end(event)
             elif machine.state == "part2_2":
                 if event.message.text == '1':
                     machine.truth(event)
