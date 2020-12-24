@@ -21,8 +21,9 @@ machine = TocMachine(
     "french_kiss", "cheek_kiss",
     "answer", "embarassed", "bully",
     "secret","open_bag",
-    "good_ending","bad_ending","suicide_ending",
-     "state1", "state2"],
+    "good_ending", "bad_ending", "suicide_ending",
+    "final_result"
+    ],
     transitions=[
         {
             "trigger": "introduction", "source": "begin", "dest": "intro",
@@ -142,8 +143,10 @@ machine = TocMachine(
         {
             "trigger": "be_sympathy", "source": "open_bag", "dest": "cheek_kiss",
         },
-        
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+
+        {
+            "trigger": "end", "source": ["bad_ending","suicide_ending"], "dest": "result",        
+        }   
     ],
     initial="user",
     auto_transitions=False,
