@@ -20,7 +20,7 @@ machine = TocMachine(
     "part1", "part2_1", "part2_2", "part3_1", "part3_2", "part4_1", "part4_2",
     "french_kiss", "cheek_kiss",
     "answer", "embarassed", "bully",
-    "secret","open_bag","love_letter",
+    "secret","open_bag",
     "good_ending","bad_ending","suicide_ending",
      "state1", "state2"],
     transitions=[
@@ -136,14 +136,11 @@ machine = TocMachine(
         {
             "trigger": "open", "source": "part4_2", "dest": "open_bag",
         },
-        {
-            "trigger": "drop", "source": "open_bag", "dest": "love_letter",
+       {
+            "trigger": "gossip", "source": "open_bag", "dest": "bully",
         },
         {
-            "trigger": "gossip", "source": "love_letter", "dest": "bully",
-        },
-        {
-            "trigger": "be_sympathy", "source": "love_letter", "dest": "cheek_kiss",
+            "trigger": "be_sympathy", "source": "open_bag", "dest": "cheek_kiss",
         },
         
         {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
@@ -287,13 +284,34 @@ def webhook_handler():
                     machine.concern(event)
                 elif event.message.text == "nothing":
                     machine.nothing(event)
-            
+            elif machine.state == "part2_2":
+                if event.message.text == '1':
+                    machine.truth(event)
+                elif event.message.text == '2':
+                    machine.dare(event)
+            elif machine.state == "part4_1":
+                if event.message.text == "cuirous":
+                    machine.tell_secret(event)
+            elif machine.state == "secret":
+                if event.message.text == "em":
+                    machine.murmur(event)
+                elif event.message.text == 'dead':
+                    machine.laugh(event)
+                elif event.message.text == "阻止班長":
+                    machine.stop(event)
+            elif machine.state == "part4_2":
+                if event.message.text == "open":
+                    machine.open(event)
+            elif machine.state == "open_bag":
+                if event.message.text == "8":
+                    machine.gossip(event)
+                elif event.message.text == "崩潰":
+                    machine.be_sympathy(event)
 
             if machine.state == "user":
                 print("Fail")
-                response = machine.advance(event)
 
-            if response == False:
+            if response == False :
                 send_text_message(event.reply_token, "Not Entering any State")
             print(machine.state)
 

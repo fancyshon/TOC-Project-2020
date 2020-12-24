@@ -78,9 +78,9 @@ class TocMachine(GraphMachine):
         )
     def on_enter_answer(self, event):
         reply_token = event.reply_token
-        story = "學藝的手機被搶了過來，看著裡面的相簿裡滿滿的都是班長的照片，大家覺得..."
+        story = "學藝的手機被搶了過來，看著裡面的相簿裡滿滿的都是班長的照片，大家..."
         line_bot_api.reply_message(
-            event.reply_token,
+            event.reply_token,[
             TemplateSendMessage(
                 alt_text ='Buttons template',
                     template = ButtonsTemplate(
@@ -97,9 +97,10 @@ class TocMachine(GraphMachine):
                             )
                         ]
                     )
-            )
+            ),
+            TextSendMessage(text="或者你想要阻止他們搶學藝手機\n輸入 阻止大家")
+            ]
         )
-        send_text_message(reply_token, "或者你想要阻止他們搶學藝手機\n輸入 阻止大家")
 
     def on_enter_embarassed(self, event):
         self.equal(event)
@@ -132,7 +133,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "有種的話，就和班長接吻啊!\n體育股長說。學藝漲紅著臉不說話")
 
-        story="開朗的班長難得做出嫌惡的表情，學藝愾起來快哭了。"
+        story="開朗的班長難得做出嫌惡的表情，學藝看起來快哭了。"
         line_bot_api.reply_message(
             event.reply_token,
             TemplateSendMessage(
@@ -171,7 +172,7 @@ class TocMachine(GraphMachine):
                                 text = 'concern'
                             ),
                             MessageTemplateAction(
-                                label='他沒說甚麼，開他玩笑應該沒關係吧',
+                                label='他沒說甚麼，開玩笑應該沒關係吧',
                                 text = 'kidding'
                             )
                         ]
@@ -208,6 +209,94 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         choice="\n\n-----------\n你選擇 1 => 真心話 ,2 => 大冒險"
         send_text_message(reply_token, "瓶子轉到班長，大家開始鼓譟要他..."+choice)
+
+    def on_enter_part4_1(self , event):
+        reply_token = event.reply_token
+        story = "來講現場一個人的祕密吧!\n副班長興沖沖的說。(我想聽學藝的，副班長接著說)"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '你覺得',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='其實我也有點好奇',
+                                text = 'cuirous'
+                            )
+                        ]
+                    )
+            )
+        )
+
+    def on_enter_secret(self, event):
+        reply_token = event.reply_token
+        story = "其實...學藝他真的喜歡男生!!!\n班長說\n原來學藝是GAY大家..."
+        line_bot_api.reply_message(
+            event.reply_token,[
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '秘密',
+                        text = story,
+                        actions=[
+                            MessageTemplateAction(
+                                label='果然呢',
+                                text = 'em'
+                            ),
+                            MessageTemplateAction(
+                                label='早就覺得她很奇怪',
+                                text = 'dead'
+                            )
+                        ]
+                )
+            ),
+            TextSendMessage(text="這樣說人家秘密真的好嗎\n輸入 阻止班長")
+            ]
+        )
+
+    def on_enter_part4_2(self, event):
+        reply_token = event.reply_token
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '大冒險',
+                        text = '把書包打開給大家看看吧!不知道會不會又違禁品呢\n體育股長這樣要求。',
+                        actions=[
+                            MessageTemplateAction(
+                                label='打開書包',
+                                text = 'open'
+                            )
+                        ]
+                    )
+            )
+        )
+
+    def on_enter_open_bag(self, event):
+        reply_token = event.reply_token
+        line_bot_api.reply_message(
+            event.reply_token,
+            TemplateSendMessage(
+                alt_text ='Buttons template',
+                    template = ButtonsTemplate(
+                        title = '班長將書包打開',
+                        text = '一封情書掉了出來，竟然是學藝寫的\n你覺得',
+                        actions=[
+                            MessageTemplateAction(
+                                label='哇!超讚的八卦',
+                                text = '8'
+                            ),
+                            MessageTemplateAction(
+                                label='學藝應該很崩潰吧',
+                                text = '崩潰'
+                            )
+                        ]
+                    )
+            )
+        )
 
     def on_enter_state1(self, event):
         print("I'm entering state1")
