@@ -10,4 +10,8 @@
 ##使用方式
 
 最一開始先對機器人輸入**start**，機器人便會開始指引你如何操作。
-依照你所做的選擇，故事最後會有3種結局
+依照你所做的選擇，故事最後會有3種結局。
+
+##FSM Diagram
+
+![image](https://tranquil-brook-42124.herokuapp.com/show-fsm)
