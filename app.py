@@ -83,7 +83,6 @@ machine = TocMachine(
         {
             "trigger": "equal", "source": "embarassed", "dest": "cheek_kiss",
         },
-
         {
             "trigger": "dare", "source": "part2_1", "dest": "part3_2",
         },
@@ -112,7 +111,6 @@ machine = TocMachine(
         {
             "trigger": "go_to_part2_2", "source": "part1", "dest": "part2_2",
         },
-        
         {
             "trigger": "truth", "source": "part2_2", "dest": "part4_1",
         },
@@ -143,7 +141,6 @@ machine = TocMachine(
         {
             "trigger": "be_sympathy", "source": "open_bag", "dest": "cheek_kiss",
         },
-
         {
             "trigger": "end", "source": ["bad_ending","suicide_ending"], "dest": "final_result",        
         }   
@@ -224,8 +221,8 @@ def webhook_handler():
 
         else:
             if event.message.text == "重新開始":
-                machine.state = "user"
-                send_text_message(event.reply_token,"Set state as user")
+                machine.state = "begin"
+                send_text_message(event.reply_token,"已重新開始")
             if event.message.text.lower() == "start":
                 machine.start(event)
             elif event.message.text == "人物介紹":

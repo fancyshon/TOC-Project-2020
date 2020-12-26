@@ -331,7 +331,8 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的"),
-                ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png")
+                ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png", preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png"),
+                TextSendMessage(text="故事結束")
             ]
         )
 
@@ -363,39 +364,8 @@ class TocMachine(GraphMachine):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(text="回想之前的每個時刻，其實我們都有機會站出來為他發生，性向沒有對錯，錯的是你的觀念"),
-                ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png",preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png")
+                ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png", preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/final.png"),
+                TextSendMessage(text="故事結束")
             ]
         )
-    
-
-    def on_enter_state1(self, event):
-        print("I'm entering state1")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state1")
-        self.go_back()
-
-    def on_exit_state1(self):
-        print("Leaving state1")
-
-    def on_enter_state2(self, event):
-        print("I'm entering state2")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state2")
-        self.go_back()
-
-    def on_exit_state2(self):
-        print("Leaving state2")
-
-    def is_going_to_state1(self, event):
-        text = event.message.text
-        return text.lower() == "go to state1"
-
-    def is_going_to_state2(self, event):
-        text = event.message.text
-        return text.lower() == "go to state2"
-
-    def is_going_to_state3(self, event):
-        text = event.message.text
-        return text.lower() == "go to state3"
+        
