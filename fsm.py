@@ -19,7 +19,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_intro(self, event):
         reply_token = event.reply_token
-        intro="1 => 班長\n2 => 學藝股長\n3 => 副班長\n4 => 體育股長\n5 => 風紀股長\ne => 離開"
+        intro="1 => 班長\n2 => 學藝股長\n3 => 副班長\n4 => 體育股長\n5 => 風紀股長\n離開 => 離開"
         send_text_message(reply_token, intro)
 
     def on_enter_1(self, event):
@@ -368,4 +368,3 @@ class TocMachine(GraphMachine):
                 TextSendMessage(text="故事結束")
             ]
         )
-        

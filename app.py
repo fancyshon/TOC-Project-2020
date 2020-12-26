@@ -222,7 +222,7 @@ def webhook_handler():
         else:
             if event.message.text == "重新開始":
                 machine.state = "begin"
-                send_text_message(event.reply_token,"已重新開始")
+                send_text_message(event.reply_token,"已重新開始\n\n我們發現學藝股長的大秘密那天，是這樣開始的...\n\n--------------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始這段故事\n你的所有選擇將會影響故事的走向")
             if event.message.text.lower() == "start":
                 machine.start(event)
             elif event.message.text == "人物介紹":
@@ -239,7 +239,7 @@ def webhook_handler():
                     machine.go4(event)
                 elif event.message.text == "5":
                     machine.go5(event)
-                elif event.message.text == "e":
+                elif event.message.text == "離開":
                     machine.fin_intro(event)
             elif machine.state == "begin":
                 if event.message.text == "故事開始":

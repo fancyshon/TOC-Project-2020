@@ -10,10 +10,10 @@
 ## 使用方式
 
 - 首先先將這個Line帳號加入好友
-    - ID : @084jgqqa
-    - QR Code : 
+    - QR Code :  
         ![image](https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/qrcode.png)
-
+    - ID : @084jgqqa
+    
 - 加入好友後輸入`Start`(大小寫沒有差別)，聊天室便會開始指引你如何操作，基本上會有兩種輸入模式
     - 文字輸入
         機器人會提示你接下來要輸入什麼指令，如下圖
