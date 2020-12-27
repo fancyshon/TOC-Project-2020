@@ -14,7 +14,7 @@ class TocMachine(GraphMachine):
     
     def on_enter_begin(self, event):
         reply_token = event.reply_token
-        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n--------------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始這段故事\n你的所有選擇將會影響故事的走向"
+        story="我們發現學藝股長的大秘密那天，是這樣開始的...\n\n-------------------\n輸入 人物介紹 查看角色\n輸入 故事開始 開始這段故事\n你的所有選擇將會影響故事的走向"
         send_text_message(reply_token, story)
 
     def on_enter_intro(self, event):
@@ -330,7 +330,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text="很慶幸我當時有站出來幫他和大家對話，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的"),
+                TextSendMessage(text="很慶幸我當時有站出來幫他跟大家講開來，讓學藝知道他不是孤單一人，我覺得這才是朋友真正應該做的"),
                 ImageSendMessage(original_content_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png", preview_image_url="https://raw.githubusercontent.com/fancyshon/TOC_Project/master/img/good_end.png"),
                 TextSendMessage(text="故事結束")
             ]

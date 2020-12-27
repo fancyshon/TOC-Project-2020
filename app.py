@@ -313,9 +313,6 @@ def webhook_handler():
                 if event.message.text == "繼續":
                     machine.end(event)
 
-            if machine.state == "user":
-                print("Fail")
-
             if response == False :
                 send_text_message(event.reply_token, "Not Entering any State")
             print(machine.state)
